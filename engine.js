@@ -194,6 +194,7 @@ function take(model, args)
             if(notAlreadyIn(taken, r.Contents[j]) && name == r.Contents[j].Name)
             {
                 taken.push(r.Contents[j]);
+                p.Inventory.push(r.Contents[j]);
                 break INNER;
             }
         }
@@ -242,8 +243,41 @@ function drop(model, args)
     return 'not implemented';
 }
 
-/*############################# TODO #########################################*/
 function inventory(model, args)
 {
-    return 'not implemented';
+    var p = model.Player;
+    var response = 'you have:\n';
+
+    if(!p.hasOwnProperty('Inventory') || p.Inventory.length == 0)
+    {
+        response += '  nothing\n';
+    }
+    else
+    {
+        var counter = {};
+
+        for(var i = 0; i < p.Inventory.length; i++)
+        {
+            var name = p.Inventory[i].Name;
+
+            if(!counter.hasOwnProperty(name))
+            {
+                counter[name] = 1;
+            }
+            else
+            {
+                counter[name] += 1;
+            }
+        }
+
+        for(var p in counter)
+        {
+            if(counter.hasOwnProperty(p))
+            {
+                response += '  ' + counter[p] + ' ' + p + '\n';
+            }
+        }
+    }
+
+    return response;
 }

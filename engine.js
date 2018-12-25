@@ -237,10 +237,67 @@ function take(model, args)
     return response;
 }
 
-/*############################# TODO #########################################*/
 function drop(model, args)
 {
-    return 'not implemented';
+    var p = model.Player;
+    var r = model.Rooms[p.Location];
+    var response = 'you dropped:\n';
+
+    if(!p.hasOwnProperty('Inventory') || p.Inventory.length == 0)
+    {
+        response += '  nothing\n';
+    }
+    else
+    {
+        var dropped = [];
+
+        for(var i = 1; i < args.length; i++)
+        {
+            var name = args[i];
+
+            for(var j = 0; j < p.Inventory.length; j++)
+            {
+                if(notAlreadyIn(dropped, p.Inventory[j]) && name == p.Inventory[j].Name)
+                {
+                    dropped.push(p.Inventory[i]);
+                }
+            }
+        }
+
+        var counter = {};
+        for(var i = 0; i < dropped.length; i++)
+        {
+            var idx = p.Inventory.indexOf(dropped[i]);
+
+            if(!counter.hasOwnProperty(dropped[i].Name))
+            {
+                counter[dropped[i].Name] = 1;
+            }
+            else
+            {
+                counter[dropped[i].Name] += 1;
+            }
+
+            p.Inventory = removeIndex(p.Inventory, idx);
+        }
+
+        if(dropped.length == 0)
+        {
+            response += '  nothing\n';
+        }
+        else
+        {
+            for(var p in counter)
+            {
+                if(counter.hasOwnProperty(p))
+                {
+                    response += '  ' + counter[p] + ' ' + p + '\n';
+                }
+            }
+        }
+    }
+
+    return response;
 }
 
 function inventory(model, args)

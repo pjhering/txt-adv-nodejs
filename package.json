@@ -1,0 +1,24 @@
+{
+  "name": "txt-adv-nodejs",
+  "version": "1.0.0",
+  "description": "A Simple Text Adventure Game",
+  "main": "main.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pjhering/txt-adv-nodejs.git"
+  },
+  "keywords": [
+    "text",
+    "adventure",
+    "game"
+  ],
+  "author": "Pete Hering <pjhering@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pjhering/txt-adv-nodejs/issues"
+  },
+  "homepage": "https://github.com/pjhering/txt-adv-nodejs#readme"
+}
